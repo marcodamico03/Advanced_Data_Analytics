@@ -1,0 +1,6 @@
+.env
+data/raw/etf_daily.csv
+data/raw/fred_market_thirdparty.csv
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store

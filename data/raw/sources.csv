@@ -1,0 +1,18 @@
+source,series_id,role,block,description,licence,redistributable,url
+FRED/ALFRED,INDPRO,regime,growth,Industrial Production Index,US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/INDPRO
+FRED/ALFRED,TCU,regime,growth,Capacity Utilization: Total Industry,US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/TCU
+FRED/ALFRED,RRSFS,regime,growth,Advance Real Retail and Food Services Sales,US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/RRSFS
+FRED/ALFRED,HOUST,regime,growth,Housing Starts: Total,US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/HOUST
+FRED/ALFRED,PAYEMS,regime,labour,"All Employees, Total Nonfarm",US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/PAYEMS
+FRED/ALFRED,UNRATE,regime,labour,Unemployment Rate,US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/UNRATE
+FRED/ALFRED,ICSA,regime,labour,Initial Claims (weekly; vintages only from 2009),US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/ICSA
+FRED/ALFRED,CPIAUCSL,regime,inflation,"CPI, All Items",US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/CPIAUCSL
+FRED/ALFRED,CPILFESL,regime,inflation,"CPI, Less Food and Energy (core)",US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/CPILFESL
+FRED/ALFRED,PPIACO,regime,inflation,"PPI, All Commodities",US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/PPIACO
+FRED/ALFRED,T10Y2Y,descriptive,market,10Y minus 2Y Treasury spread,US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/T10Y2Y
+FRED/ALFRED,BAA10Y,descriptive,market,Moody's Baa yield minus 10Y Treasury,Third-party copyright - do not redistribute; regenerate with this script,False,https://fred.stlouisfed.org/series/BAA10Y
+FRED/ALFRED,NFCI,descriptive,market,Chicago Fed National Financial Conditions Index,Federal Reserve Bank of Chicago - verify terms before redistributing,False,https://fred.stlouisfed.org/series/NFCI
+Yahoo Finance (yfinance),SPY,asset,asset,SPY daily prices,Yahoo terms of service - do not redistribute; regenerate with this script,False,https://finance.yahoo.com/quote/SPY
+Yahoo Finance (yfinance),TLT,asset,asset,TLT daily prices,Yahoo terms of service - do not redistribute; regenerate with this script,False,https://finance.yahoo.com/quote/TLT
+Yahoo Finance (yfinance),GLD,asset,asset,GLD daily prices,Yahoo terms of service - do not redistribute; regenerate with this script,False,https://finance.yahoo.com/quote/GLD
+Yahoo Finance (yfinance),DBC,asset,asset,DBC daily prices,Yahoo terms of service - do not redistribute; regenerate with this script,False,https://finance.yahoo.com/quote/DBC
