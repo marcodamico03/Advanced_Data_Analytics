@@ -12,7 +12,7 @@ FIGURES = ROOT / "figures"
 TABLES = ROOT / "tables"
 
 FREEZE_DATE = "2026-09-28"  # all FRED data as known on this date
-OBS_START = "2000-01-01"    # earlier than the sample, needed for 12-month changes
+OBS_START = "1990-01-01"    # earlier than the sample, needed for 12-month changes
 RANDOM_SEED = 42
 
 PUBLIC = "US government source - public domain (verify on the FRED series page)"
