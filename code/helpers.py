@@ -5,6 +5,9 @@ Only loading and saving for now; functions are added here when a second
 notebook needs them, never copied between notebooks.
 """
 
+import math
+
+import numpy as np
 import pandas as pd
 
 import config
@@ -52,6 +55,45 @@ def load_etf_prices(field="Adj Close"):
     """
     df = pd.read_csv(config.DATA_RAW / "etf_daily.csv", parse_dates=["date"])
     return df.pivot(index="date", columns="ticker", values=field)
+
+
+# ---------------------------------------------------------------------------
+# Statistics
+# ---------------------------------------------------------------------------
+def ols_hac(y, X, lags=None):
+    """
+    OLS with Newey-West (1987) standard errors, robust to autocorrelation and
+    heteroskedasticity. y: Series, X: DataFrame of regressors (a constant is added).
+    lags=None uses the usual rule floor(4 * (T/100)^(2/9)).
+    Returns a table (coef, se, t, p) and a dict with R2 and number of observations.
+    """
+    data = pd.concat([y, X], axis=1).dropna()
+    yv = data.iloc[:, 0].to_numpy()
+    Xv = np.column_stack([np.ones(len(data)), data.iloc[:, 1:].to_numpy()])
+    names = ["const"] + list(X.columns)
+    T = len(yv)
+    if lags is None:
+        lags = int(np.floor(4 * (T / 100) ** (2 / 9)))
+
+    XtX_inv = np.linalg.inv(Xv.T @ Xv)
+    beta = XtX_inv @ Xv.T @ yv
+    u = yv - Xv @ beta
+
+    # long-run covariance of x_t * u_t, Bartlett weights
+    g = Xv * u[:, None]
+    S = g.T @ g
+    for j in range(1, lags + 1):
+        w = 1 - j / (lags + 1)
+        G = g[j:].T @ g[:-j]
+        S += w * (G + G.T)
+    V = XtX_inv @ S @ XtX_inv
+
+    se = np.sqrt(np.diag(V))
+    t = beta / se
+    p = np.array([math.erfc(abs(x) / math.sqrt(2)) for x in t])   # two-sided, normal approximation
+    table = pd.DataFrame({"coef": beta, "se": se, "t": t, "p": p}, index=names)
+    r2 = 1 - (u @ u) / ((yv - yv.mean()) @ (yv - yv.mean()))
+    return table, {"r2": r2, "nobs": T, "lags": lags}
 
 
 # ---------------------------------------------------------------------------
