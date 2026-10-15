@@ -93,7 +93,16 @@ def ols_hac(y, X, lags=None):
     p = np.array([math.erfc(abs(x) / math.sqrt(2)) for x in t])   # two-sided, normal approximation
     table = pd.DataFrame({"coef": beta, "se": se, "t": t, "p": p}, index=names)
     r2 = 1 - (u @ u) / ((yv - yv.mean()) @ (yv - yv.mean()))
-    return table, {"r2": r2, "nobs": T, "lags": lags}
+    return table, {"r2": r2, "nobs": T, "lags": lags, "cov": pd.DataFrame(V, index=names, columns=names)}
+
+
+def wald_test(table, info, variables):
+    """Joint test that the coefficients of `variables` are all zero, using the Newey-West covariance."""
+    from scipy.stats import chi2
+    b = table.loc[variables, "coef"].to_numpy()
+    V = info["cov"].loc[variables, variables].to_numpy()
+    stat = float(b @ np.linalg.solve(V, b))
+    return stat, float(chi2.sf(stat, len(variables)))
 
 
 # ---------------------------------------------------------------------------
