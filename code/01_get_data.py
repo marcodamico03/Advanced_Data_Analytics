@@ -106,7 +106,7 @@ def download_etfs(tickers):
 def write_sources():
     """Table with source and licence of every series."""
     rows = []
-    for role, series in [("regime", MACRO_SERIES), ("descriptive", MARKET_SERIES)]:
+    for role, series in [("regime", MACRO_SERIES), ("market", MARKET_SERIES)]:
         for sid, (block, desc, licence, shareable) in series.items():
             rows.append({"source": "FRED/ALFRED", "series_id": sid, "role": role, "block": block,
                          "description": desc, "licence": licence, "redistributable": shareable,
