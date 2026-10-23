@@ -32,12 +32,13 @@ MACRO_SERIES = {
     "PPIACO":   ("inflation", "PPI, All Commodities",                        PUBLIC, True),
 }
 
-# market series, only to describe the regimes (not used to build them)
+# market series, not used to build the regimes: the first three describe them, TB3MS is the cash rate of the backtest
 MARKET_SERIES = {
     "T10Y2Y": ("market", "10Y minus 2Y Treasury spread",           PUBLIC, True),
     "BAA10Y": ("market", "Moody's Baa yield minus 10Y Treasury",   THIRD_PARTY, False),
     "NFCI":   ("market", "Chicago Fed National Financial Conditions Index",
                "Federal Reserve Bank of Chicago - verify terms before redistributing", False),
+    "TB3MS":  ("cash",   "3-Month Treasury Bill, secondary market rate", PUBLIC, True),
 }
 
 # stocks, long Treasuries, gold, commodities
