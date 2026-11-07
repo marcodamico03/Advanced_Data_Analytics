@@ -1,8 +1,8 @@
 """
 Functions used by more than one stage (Requirement 4.9).
 
-Only loading and saving for now; functions are added here when a second
-notebook needs them, never copied between notebooks.
+A function is moved here as soon as a second notebook needs it, never copied
+between notebooks.
 """
 
 import math
@@ -103,6 +103,102 @@ def wald_test(table, info, variables):
     V = info["cov"].loc[variables, variables].to_numpy()
     stat = float(b @ np.linalg.solve(V, b))
     return stat, float(chi2.sf(stat, len(variables)))
+
+
+def sharpe_diff_test(a, b, lags=None):
+    """
+    Annualised Sharpe ratio of a minus that of b (monthly excess returns), with the
+    standard error of Ledoit and Wolf (2008): delta method, Newey-West covariance.
+    Returns a dict: sharpe difference, se, p (two-sided).
+    """
+    from scipy.stats import norm
+    x = pd.concat([a, b], axis=1).dropna().to_numpy()
+    T = len(x)
+    y = np.column_stack([x, x ** 2])
+    m1, m2, g1, g2 = y.mean(axis=0)
+    s1, s2 = np.sqrt(g1 - m1 ** 2), np.sqrt(g2 - m2 ** 2)
+    diff = m1 / s1 - m2 / s2
+    grad = np.array([g1 / s1 ** 3, -g2 / s2 ** 3, -m1 / (2 * s1 ** 3), m2 / (2 * s2 ** 3)])
+    u = y - y.mean(axis=0)
+    if lags is None:
+        lags = int(np.floor(4 * (T / 100) ** (2 / 9)))
+    S = u.T @ u / T
+    for j in range(1, lags + 1):
+        G = u[j:].T @ u[:-j] / T
+        S += (1 - j / (lags + 1)) * (G + G.T)
+    se = np.sqrt(grad @ S @ grad / T)
+    return {"sharpe difference": np.sqrt(12) * diff, "se": np.sqrt(12) * se, "p": 2 * norm.sf(abs(diff / se))}
+
+
+# ---------------------------------------------------------------------------
+# Portfolios (stages 4 and 5)
+# ---------------------------------------------------------------------------
+def monthly_correlations(daily_returns, min_days=15):
+    """
+    Correlation matrix of the daily returns of each calendar month, using days
+    where every asset has a return, if there are at least min_days of them.
+    Returns (month-end dates, array months x assets x assets).
+    """
+    months, mats = [], []
+    for m, g in daily_returns.resample("ME"):
+        g = g.dropna()
+        if len(g) >= min_days:
+            months.append(m)
+            mats.append(g.corr().to_numpy())
+    return pd.DatetimeIndex(months), np.stack(mats)
+
+
+def erc_weights(cov, tol=1e-12, max_iter=10_000):
+    """Equal risk contribution weights, by cyclical coordinate descent (Griveau-Billion, Richard and Roncalli, 2013)."""
+    n = len(cov)
+    x = 1 / np.sqrt(np.diag(cov))
+    for _ in range(max_iter):
+        x_old = x.copy()
+        for i in range(n):
+            a = cov[i] @ x - cov[i, i] * x[i]
+            x[i] = (-a + np.sqrt(a * a + 4 * cov[i, i] / n)) / (2 * cov[i, i])
+        if np.abs(x - x_old).max() < tol:
+            break
+    return x / x.sum()
+
+
+def backtest(positions, asset_returns, rf, cost_bps):
+    """
+    Monthly net returns of one strategy.
+
+    positions: DataFrame, one row per decision date t (a month-end), one column per asset,
+    held during month t+1; what is not invested earns rf, what is borrowed costs rf.
+    During the month positions drift with prices; the next trade is the gap between the
+    drifted and the new positions, and pays cost_bps per dollar traded.
+    Returns a DataFrame indexed by the month held: net, turnover, exposure.
+    """
+    assets = list(positions.columns)
+    out, drifted = [], np.zeros(len(assets))
+    for t in positions.index:
+        nxt = t + pd.offsets.MonthEnd(1)
+        w = positions.loc[t].to_numpy(dtype=float)
+        turnover = np.abs(w - drifted).sum()
+        r = asset_returns.loc[nxt, assets].to_numpy()
+        gross = w @ r + (1 - w.sum()) * rf[nxt]
+        out.append({"date": nxt, "net": gross - cost_bps / 10_000 * turnover, "turnover": turnover,
+                    "exposure": w.sum()})
+        drifted = w * (1 + r) / (1 + gross)
+    return pd.DataFrame(out).set_index("date")
+
+
+def max_drawdown(r):
+    """Largest fall from a previous peak of the wealth built from returns r."""
+    wealth = (1 + r).cumprod()
+    return (wealth / wealth.cummax() - 1).min()
+
+
+def performance(bt, rf):
+    """Summary of a backtest (output of backtest): excess returns over rf, annualised."""
+    ex = bt["net"] - rf.reindex(bt.index)
+    return {"excess return": 12 * ex.mean(), "volatility": np.sqrt(12) * ex.std(),
+            "sharpe": np.sqrt(12) * ex.mean() / ex.std(), "max drawdown": max_drawdown(bt["net"]),
+            "worst month": bt["net"].min(), "turnover per year": 12 * bt["turnover"].mean(),
+            "average exposure": bt["exposure"].mean(), "months": len(bt)}
 
 
 # ---------------------------------------------------------------------------
