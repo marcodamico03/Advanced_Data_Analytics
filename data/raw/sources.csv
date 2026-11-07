@@ -9,9 +9,10 @@ FRED/ALFRED,ICSA,regime,labour,Initial Claims (weekly; vintages only from 2009),
 FRED/ALFRED,CPIAUCSL,regime,inflation,"CPI, All Items",US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/CPIAUCSL
 FRED/ALFRED,CPILFESL,regime,inflation,"CPI, Less Food and Energy (core)",US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/CPILFESL
 FRED/ALFRED,PPIACO,regime,inflation,"PPI, All Commodities",US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/PPIACO
-FRED/ALFRED,T10Y2Y,descriptive,market,10Y minus 2Y Treasury spread,US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/T10Y2Y
-FRED/ALFRED,BAA10Y,descriptive,market,Moody's Baa yield minus 10Y Treasury,Third-party copyright - do not redistribute; regenerate with this script,False,https://fred.stlouisfed.org/series/BAA10Y
-FRED/ALFRED,NFCI,descriptive,market,Chicago Fed National Financial Conditions Index,Federal Reserve Bank of Chicago - verify terms before redistributing,False,https://fred.stlouisfed.org/series/NFCI
+FRED/ALFRED,T10Y2Y,market,market,10Y minus 2Y Treasury spread,US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/T10Y2Y
+FRED/ALFRED,BAA10Y,market,market,Moody's Baa yield minus 10Y Treasury,Third-party copyright - do not redistribute; regenerate with this script,False,https://fred.stlouisfed.org/series/BAA10Y
+FRED/ALFRED,NFCI,market,market,Chicago Fed National Financial Conditions Index,Federal Reserve Bank of Chicago - verify terms before redistributing,False,https://fred.stlouisfed.org/series/NFCI
+FRED/ALFRED,TB3MS,market,cash,"3-Month Treasury Bill, secondary market rate",US government source - public domain (verify on the FRED series page),True,https://fred.stlouisfed.org/series/TB3MS
 Yahoo Finance (yfinance),SPY,asset,asset,SPY daily prices,Yahoo terms of service - do not redistribute; regenerate with this script,False,https://finance.yahoo.com/quote/SPY
 Yahoo Finance (yfinance),TLT,asset,asset,TLT daily prices,Yahoo terms of service - do not redistribute; regenerate with this script,False,https://finance.yahoo.com/quote/TLT
 Yahoo Finance (yfinance),GLD,asset,asset,GLD daily prices,Yahoo terms of service - do not redistribute; regenerate with this script,False,https://finance.yahoo.com/quote/GLD
