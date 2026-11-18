@@ -1,0 +1,7 @@
+,renamed,"kept, mean","kept, worst",worst refit,same label without matching
+"PCA + GMM, $k=3$ (main)",21.000,0.968,0.273,Mar 2009,0.384
+"PCA + K-Means, $k=3$",0.000,0.996,0.765,Jun 2009,
+"PCA + GMM, $k=3$, revised",2.000,0.981,0.649,May 2007,
+"PCA + GMM, $k=4$",6.000,0.948,0.385,Aug 2009,
+"Indices + GMM, $k=2$",23.000,0.994,0.600,Jan 2001,
+"Indices + CPI level + GMM, $k=4$",8.000,0.941,0.493,Oct 2012,

@@ -1,0 +1,19 @@
+\begin{tabular}{lrrrrr}
+\toprule
+ & \multicolumn{2}{c}{Next 3 months} & \multicolumn{2}{c}{Next month} & \multicolumn{1}{c}{Revised, 3 m.} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-6}
+Regimes (real time) & $R^2$ (\%) & $p$ & $R^2$ (\%) & $p$ & $R^2$ (\%) \\
+\midrule
+Quadrants & 14.4 & 0.003 & 10.9 & 0.003 & 15.0 \\
+PCA + GMM, $k=3$ (main) & 0.3 & 0.517 & 0.8 & 0.213 & 0.9 \\
+PCA + K-Means, $k=3$ & 2.4 & 0.412 & 1.3 & 0.415 & 2.8 \\
+PCA + GMM, $k=2$ & 3.8 & 0.042 & 0.7 & 0.297 & 0.0 \\
+PCA + GMM, $k=4$ & 26.3 & $<$0.001 & 16.5 & $<$0.001 & 8.0 \\
+PCA, 3-month changes + GMM, $k=3$ & 18.7 & $<$0.001 & 12.9 & $<$0.001 & 10.3 \\
+PCA + CPI level + GMM, $k=3$ & 11.7 & 0.002 & 6.5 & 0.009 & 5.1 \\
+Indices + GMM, $k=2$ (BIC) & 0.1 & 0.730 & 0.1 & 0.756 & 0.4 \\
+Indices + GMM, $k=4$ & 12.8 & 0.013 & 7.3 & 0.033 & 10.5 \\
+Indices + K-Means, $k=4$ & 11.7 & 0.016 & 8.6 & 0.015 & 16.4 \\
+Indices + CPI level + GMM, $k=4$ (BIC) & 6.7 & 0.062 & 4.9 & 0.064 & 13.3 \\
+\bottomrule
+\end{tabular}

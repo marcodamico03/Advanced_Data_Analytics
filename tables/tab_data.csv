@@ -1,0 +1,11 @@
+,block,description,transformation,first vintage,vintages,revision
+INDPRO,growth,Industrial production,log change,1990-02,466.000,1.145
+TCU,growth,Capacity utilisation,level,1996-11,385.000,1.031
+RRSFS,growth,Real retail sales,log change,2001-06,494.000,0.605
+HOUST,growth,Housing starts,log change,1990-02,435.000,2.323
+PAYEMS,labour,Nonfarm payrolls,log change,1990-02,441.000,0.226
+UNRATE,labour,Unemployment rate,change,1990-02,440.000,0.046
+ICSA,labour,Initial jobless claims,log change,2009-05,899.000,1.310
+CPIAUCSL,inflation,"CPI, all items",log change,1990-02,458.000,0.030
+CPILFESL,inflation,"CPI, core",log change,1996-12,376.000,0.019
+PPIACO,inflation,"PPI, all commodities",log change,1996-12,367.000,0.144

@@ -1,0 +1,9 @@
+,"10 bps, levered","10 bps, no leverage"
+60/40,0.663,0.663
+"RP, static",0.684,0.671
+"RP, 12-month",0.684,0.689
+"RP, quadrants",0.691,0.675
+"RP, GMM regimes",0.682,0.660
+"RP, quadrants (rev.)",0.689,0.673
+"RP, GMM (rev.)",0.681,0.673
+"RP, perfect foresight",0.890,0.775

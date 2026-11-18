@@ -1,0 +1,24 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+ &  & \multicolumn{2}{c}{$R^2_{OS}$ (\%)} &  & \multicolumn{2}{c}{Portfolio} \\
+\cmidrule(lr){3-4} \cmidrule(lr){6-7}
+Forecast & RMSE & vs mean & vs 12m & DM $p$ & Sharpe & Gain (\%) \\
+\midrule
+\multicolumn{7}{l}{\emph{Benchmarks}} \\
+Historical mean & 0.378 & 0.0 & $-$47.0 & 0.002 & 0.663 & $-$20 \\
+Last month & 0.364 & 7.5 & $-$36.0 & 0.003 & 0.675 & $-$9 \\
+12-month average & 0.312 & 32.0 & -- & -- & 0.684 & -- \\
+\addlinespace
+\multicolumn{7}{l}{\emph{Models}} \\
+Linear regression & 0.321 & 28.2 & $-$5.5 & 0.480 & 0.666 & $-$18 \\
+Ridge, market & 0.307 & 34.2 & 3.3 & 0.537 & 0.679 & $-$4 \\
+Ridge, all & 0.307 & 34.3 & 3.4 & 0.551 & 0.679 & $-$5 \\
+Random forest, market & 0.305 & 35.2 & 4.8 & 0.420 & 0.693 & 8 \\
+Random forest, all & 0.303 & 35.8 & 5.6 & 0.322 & 0.695 & 11 \\
+Boosting, market & 0.315 & 30.8 & $-$1.7 & 0.789 & 0.690 & 6 \\
+Boosting, all & 0.311 & 32.4 & 0.6 & 0.932 & 0.690 & 6 \\
+\addlinespace
+\multicolumn{7}{l}{\emph{Upper bound}} \\
+Perfect foresight & 0.000 & 100.0 & 100.0 & -- & 0.787 & 100 \\
+\bottomrule
+\end{tabular}
